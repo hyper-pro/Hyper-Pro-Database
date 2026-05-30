@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="AioHky6gBYFTKoXFnESEp7ri323X5lvvZAtSQ48WSLM" />
+    <meta name="google-site-verification" content="AioHky6gBYFTKoXFnESEp7ri323X5lvvZAtSQ48WSLM">
 
     <!-- Google Search Engine Optimization (SEO) for 'hyper pro database' -->
     <title>Hyper Pro Database</title>
-    <meta name="description"
-        content="Hyper Pro Database is the ultimate secure, private online database for quick web links, custom notes, and interactive tasks. Access hyper pro database online.">
-    <meta name="keywords"
-        content="hyper pro database, hyper pro database online, hyper pro secure vault, hyper pro database system, personal database, web links manager, classified notes workspace, secure task manager">
+    <meta name="description" content="Hyper Pro Database is the ultimate secure, private online database for quick web links, custom notes, and interactive tasks. Access hyper pro database online.">
+    <meta name="keywords" content="hyper pro database, hyper pro database online, hyper pro secure vault, hyper pro database system, personal database, web links manager, classified notes workspace, secure task manager">
     <meta name="author" content="Sithula Vikasitha">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph Tags / Facebook -->
-    <meta property="og:title" content="Hyper Pro Database | Secure Classified Workspace & Vault">
-    <meta property="og:description"
-        content="The premium, ultra-secure database system to organize links, private notes, and mission-critical tasks in one classified dashboard.">
+    <meta property="og:title" content="Hyper Pro Database | Secure Classified Workspace &amp; Vault">
+    <meta property="og:description" content="The premium, ultra-secure database system to organize links, private notes, and mission-critical tasks in one classified dashboard.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyper-pro-login-form.firebaseapp.com/">
     <meta property="og:image" content="https://hyper-pro-login-form.firebaseapp.com/assets/main.png">
@@ -26,8 +20,7 @@
     <!-- Twitter Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hyper Pro Database - Secure Classified Workspace">
-    <meta name="twitter:description"
-        content="Organize links, private notes, and tasks in one high-security database. Fully encrypted terminal theme.">
+    <meta name="twitter:description" content="Organize links, private notes, and tasks in one high-security database. Fully encrypted terminal theme.">
     <meta name="twitter:image" content="https://hyper-pro-login-form.firebaseapp.com/assets/main.png">
 
     <!-- Schema.org JSON-LD Structured Data for Elite Google Ranking -->
@@ -56,9 +49,7 @@
 
     <link rel="icon" type="image/png" href="assets/main.png">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -212,6 +203,14 @@
             outline: none;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             letter-spacing: 4px;
+        }
+
+        /* PIN masking — type=text so browsers never identify as password field.
+           -webkit-text-security:disc masks visually in Chrome/Edge/Safari.
+           Firefox fallback is handled via JS below. */
+        .pin-mask-input {
+            -webkit-text-security: disc;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
         }
 
         .login-box input:focus {
@@ -688,6 +687,19 @@
             z-index: 2;
         }
 
+        .card p.task-preview a.linkified {
+            color: #818cf8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card p.task-preview a.linkified:hover {
+            color: #a5b4fc;
+            text-decoration: underline;
+        }
+
         /* --- Google Tasks Layout Overrides --- */
         .tasks-tab-active {
             display: flex !important;
@@ -1141,6 +1153,47 @@
             top: 30px !important;
             right: 40px !important;
             font-size: 28px !important;
+        }
+
+        /* --- Mobile Modal: Bigger inputs for notes editing --- */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 96%;
+                max-width: 96%;
+                padding: 30px 20px;
+                margin: 5% auto;
+            }
+
+            .modal-content input {
+                padding: 16px 14px;
+                font-size: 17px;
+            }
+
+            .modal-content textarea {
+                min-height: 260px;
+                font-size: 16px;
+                padding: 16px 14px;
+                line-height: 1.7;
+            }
+
+            /* Full-screen note editor mobile adjustments */
+            .modal-content.full-screen {
+                padding: 30px 20px !important;
+            }
+
+            .modal-content.full-screen #noteInputs .input-group:nth-child(1) input {
+                font-size: 20px !important;
+            }
+
+            .modal-content.full-screen #noteInputs .input-group:nth-child(2) textarea {
+                min-height: calc(100vh - 260px) !important;
+                font-size: 15px !important;
+            }
+
+            .modal-content.full-screen .close-modal-btn {
+                top: 20px !important;
+                right: 20px !important;
+            }
         }
 
         @keyframes modalIn {
@@ -1717,31 +1770,168 @@
                 right: 20px;
             }
         }
+        /* --- Custom Popup / Confirm Dialog --- */
+        .custom-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 4, 8, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-popup-overlay.show {
+            display: flex;
+        }
+
+        .custom-popup-box {
+            background: rgba(12, 15, 28, 0.98);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 16px;
+            padding: 32px 28px 24px 28px;
+            width: 90%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(99, 102, 241, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            animation: popupIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes popupIn {
+            from {
+                transform: scale(0.9) translateY(10px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .custom-popup-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+            font-size: 22px;
+        }
+
+        .custom-popup-icon.error {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            color: #f87171;
+        }
+
+        .custom-popup-icon.warning {
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            color: #fbbf24;
+        }
+
+        .custom-popup-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .custom-popup-msg {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            word-break: break-word;
+        }
+
+        .custom-popup-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .custom-popup-btn {
+            padding: 11px 24px;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            flex: 1;
+            max-width: 160px;
+        }
+
+        .custom-popup-btn.cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .custom-popup-btn.cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f1f5f9;
+        }
+
+        .custom-popup-btn.confirm-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .custom-popup-btn.confirm-delete:hover {
+            background: rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        .custom-popup-btn.ok {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .custom-popup-btn.ok:hover {
+            background: rgba(99, 102, 241, 0.3);
+            color: #c7d2fe;
+        }
     </style>
 </head>
 
 <body>
 
     <!-- Loading Interface -->
-    <div id="pageLoader">
+    <div id="pageLoader" style="opacity: 0; display: none;">
         <div class="loader-spinner"></div>
         <h2 class="loader-text">SECURE ACCESS</h2>
     </div>
 
 
     <!-- Login System -->
-    <div id="loginOverlay">
+    <div id="loginOverlay" style="opacity: 0; display: none;">
         <div class="login-box">
-            <h2
-                style="color: #fff; margin-bottom: 8px; font-weight: 800; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px; text-transform: uppercase;">
+            <h2 style="color: #fff; margin-bottom: 8px; font-weight: 800; font-family: 'Outfit', sans-serif; letter-spacing: -0.5px; text-transform: uppercase;">
                 SECURE VAULT</h2>
-            <p
-                style="color: #64748b; font-size: 10px; margin-bottom: 24px; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;">
+            <p style="color: #64748b; font-size: 10px; margin-bottom: 24px; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;">
                 SYSTEM AUTHORIZATION <span id="secretTrigger" style="cursor: text; user-select: none;">REQUIRED</span></p>
-            <input type="password" id="passInput" placeholder="ENTER SECURITY PIN">
+            <input type="text" id="passInput" class="pin-mask-input" placeholder="ENTER SECURITY PIN" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
             <button id="loginBtn">AUTHORIZE DECRYPTION</button>
-            <p id="errorMsg"
-                style="color: #ef4444; display: none; margin-top: 16px; font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px;">
+            <p id="errorMsg" style="color: #ef4444; display: none; margin-top: 16px; font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; letter-spacing: 0.5px;">
                 ACCESS DENIED: INVALID KEY PIN</p>
 
             <!-- Hidden Password Change Panel -->
@@ -1750,14 +1940,14 @@
                 <div id="pwStep1">
                     <p style="color: #94a3b8; font-size: 11px; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px;">SECURITY VERIFICATION</p>
                     <p style="color: #64748b; font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 12px; font-weight: 500;">What is your birth year?</p>
-                    <input type="password" id="securityAnswer" placeholder="ENTER ANSWER" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-align: center; outline: none; letter-spacing: 3px; margin-bottom: 12px;">
+                    <input type="text" id="securityAnswer" class="pin-mask-input" placeholder="ENTER ANSWER" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-align: center; outline: none; letter-spacing: 3px; margin-bottom: 12px;">
                     <button id="verifyAnswerBtn" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); padding: 10px; border-radius: 10px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; width: 100%; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease;">VERIFY</button>
                     <p id="securityError" style="color: #ef4444; display: none; margin-top: 10px; font-size: 11px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;">VERIFICATION FAILED</p>
                 </div>
                 <!-- Step 2: New Password -->
                 <div id="pwStep2" style="display: none;">
                     <p style="color: #10b981; font-size: 11px; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px;">✓ VERIFIED — SET NEW PIN</p>
-                    <input type="password" id="newPasswordInput" placeholder="ENTER NEW PIN" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-align: center; outline: none; letter-spacing: 3px; margin-bottom: 12px;">
+                    <input type="text" id="newPasswordInput" class="pin-mask-input" placeholder="ENTER NEW PIN" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; text-align: center; outline: none; letter-spacing: 3px; margin-bottom: 12px;">
                     <button id="saveNewPwBtn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; width: 100%; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s ease;">SAVE NEW PIN</button>
                     <p id="pwSaveSuccess" style="color: #10b981; display: none; margin-top: 10px; font-size: 11px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;">✓ PIN UPDATED SUCCESSFULLY</p>
                 </div>
@@ -1766,9 +1956,8 @@
     </div>
 
     <!-- Hamburger Toggle Button (mobile) -->
-    <button class="sidebar-toggle shifted" id="sidebarToggle" title="Toggle Menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+    <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -1779,26 +1968,24 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Main Dashboard Area -->
-    <main id="mainContent">
+    <main id="mainContent" style="display: block;">
         <div class="app-layout">
             <!-- Left Sidebar Navigation -->
-            <div class="tabs-container sidebar-open" id="sidebarNav">
+            <div class="tabs-container" id="sidebarNav">
                 <div class="sidebar-brand">
                     <img src="assets/main.png" alt="Hyper Pro Logo">
-                    <span>HYPER PRO</br>&nbsp;DATABASE</span>
+                    <span>HYPER PRO<br>&nbsp;DATABASE</span>
                 </div>
                 <div class="sidebar-section-label">Navigation</div>
                 <button class="tab-btn active" id="tabLinks">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                     </svg>
                     Links Data
                 </button>
                 <button class="tab-btn" id="tabNotes">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                         <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -1807,8 +1994,7 @@
                     Secure Notes
                 </button>
                 <button class="tab-btn" id="tabTasks">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M9 11l3 3L22 4"></path>
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                     </svg>
@@ -1834,27 +2020,899 @@
                 </div>
 
                 <!-- Dynamic Content Grid -->
-                <div class="card-container" id="cardContainer"></div>
+                <div class="card-container list-layout" id="cardContainer"><div class="section-divider">Workspace</div><div class="sub-grid" id="workspaceGrid"><div class="card" data-id="ULLPlbYg5ruQDoyHY06Y">
+                    <button class="pin-btn pinned" onclick="togglePin('ULLPlbYg5ruQDoyHY06Y', event)" title="Unpin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Tharanga Motors</h3>
+                        </div>
+                        <span class="card-url">https://hyper-pro.github.io/Tharanga-Motors/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hyper-pro.github.io/Tharanga-Motors/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Tharanga Motors in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('ULLPlbYg5ruQDoyHY06Y')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('ULLPlbYg5ruQDoyHY06Y')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="vC2YUfzSRdHfmxIhDvMv">
+                    <button class="pin-btn " onclick="togglePin('vC2YUfzSRdHfmxIhDvMv', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Ben 10 ominiverse </h3>
+                        </div>
+                        <span class="card-url">https://ginisisilacartoon.net/more.php?cat=1055</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://ginisisilacartoon.net/more.php?cat=1055" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Ben 10 ominiverse  in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('vC2YUfzSRdHfmxIhDvMv')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('vC2YUfzSRdHfmxIhDvMv')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="KqwN9ShxLHme3bQaonTB">
+                    <button class="pin-btn " onclick="togglePin('KqwN9ShxLHme3bQaonTB', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>BG remover</h3>
+                        </div>
+                        <span class="card-url">https://www.photoroom.com/tools/background-remover?utm_source=google&amp;utm_medium=search&amp;utm_id=23340009783&amp;utm_campaign=Web_Search_DSA_BAU_ALL_en_tROAS&amp;utm_content=787624487699&amp;adset_name=Customer-Stories&amp;ad_name=NA&amp;adset_id=190335027536&amp;utm_term=&amp;matchtype=&amp;network=g&amp;device=c&amp;placement=&amp;gad_source=1&amp;gad_campaignid=23340009783&amp;gbraid=0AAAAABrDMJiGqblczOZS_OPz8R2Eh6MT4&amp;gclid=Cj0KCQjw_b_QBhCSARIsAP6hR4dwohLAW9WOI5AHsf2Zy9_rbzo-UzI2bjM3SzLEszBwPDR68jJzqq4aAm-AEALw_wcB</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.photoroom.com/tools/background-remover?utm_source=google&amp;utm_medium=search&amp;utm_id=23340009783&amp;utm_campaign=Web_Search_DSA_BAU_ALL_en_tROAS&amp;utm_content=787624487699&amp;adset_name=Customer-Stories&amp;ad_name=NA&amp;adset_id=190335027536&amp;utm_term=&amp;matchtype=&amp;network=g&amp;device=c&amp;placement=&amp;gad_source=1&amp;gad_campaignid=23340009783&amp;gbraid=0AAAAABrDMJiGqblczOZS_OPz8R2Eh6MT4&amp;gclid=Cj0KCQjw_b_QBhCSARIsAP6hR4dwohLAW9WOI5AHsf2Zy9_rbzo-UzI2bjM3SzLEszBwPDR68jJzqq4aAm-AEALw_wcB" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open BG remover in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('KqwN9ShxLHme3bQaonTB')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('KqwN9ShxLHme3bQaonTB')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="5hbkY55u0bYCn0uXOggo">
+                    <button class="pin-btn " onclick="togglePin('5hbkY55u0bYCn0uXOggo', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>canva pro</h3>
+                        </div>
+                        <span class="card-url">https://biozium.com/public/bio-links/marcelo-mccoy/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://biozium.com/public/bio-links/marcelo-mccoy/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open canva pro in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('5hbkY55u0bYCn0uXOggo')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('5hbkY55u0bYCn0uXOggo')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="qQs2G8UrKDm0eoAXMhHZ">
+                    <button class="pin-btn " onclick="togglePin('qQs2G8UrKDm0eoAXMhHZ', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>canva pro website</h3>
+                        </div>
+                        <span class="card-url">https://bingotingo.com/best-social-media-platforms/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://bingotingo.com/best-social-media-platforms/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open canva pro website in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('qQs2G8UrKDm0eoAXMhHZ')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('qQs2G8UrKDm0eoAXMhHZ')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="rIApHSSP0ktxn2pnqXzH">
+                    <button class="pin-btn " onclick="togglePin('rIApHSSP0ktxn2pnqXzH', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Drive Databse</h3>
+                        </div>
+                        <span class="card-url">https://drive.google.com/drive/folders/1zYTJyNUfSHlN2-zljJmNxS1bZ-CWvwiA?usp=sharing</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://drive.google.com/drive/folders/1zYTJyNUfSHlN2-zljJmNxS1bZ-CWvwiA?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Drive Databse in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('rIApHSSP0ktxn2pnqXzH')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('rIApHSSP0ktxn2pnqXzH')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="gU7U8qdSJjFXZ2GKTzjZ">
+                    <button class="pin-btn " onclick="togglePin('gU7U8qdSJjFXZ2GKTzjZ', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Free City</h3>
+                        </div>
+                        <span class="card-url">https://hyper-pro.github.io/Free-City/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hyper-pro.github.io/Free-City/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Free City in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('gU7U8qdSJjFXZ2GKTzjZ')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('gU7U8qdSJjFXZ2GKTzjZ')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="KJrCaB77xGLlfPH883W1">
+                    <button class="pin-btn " onclick="togglePin('KJrCaB77xGLlfPH883W1', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Free Games</h3>
+                        </div>
+                        <span class="card-url">https://fitgirl-repacks.site/popular-repacks/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://fitgirl-repacks.site/popular-repacks/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Free Games in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('KJrCaB77xGLlfPH883W1')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('KJrCaB77xGLlfPH883W1')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="y88FUSu7xFoZiAVY6hP6">
+                    <button class="pin-btn " onclick="togglePin('y88FUSu7xFoZiAVY6hP6', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>free games creative corner</h3>
+                        </div>
+                        <span class="card-url">https://creativeconor.com/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://creativeconor.com/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open free games creative corner in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('y88FUSu7xFoZiAVY6hP6')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('y88FUSu7xFoZiAVY6hP6')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="4kquYxZPPnjmKY3ni6vB">
+                    <button class="pin-btn " onclick="togglePin('4kquYxZPPnjmKY3ni6vB', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Google Search</h3>
+                        </div>
+                        <span class="card-url">https://google.com</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Google Search in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('4kquYxZPPnjmKY3ni6vB')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('4kquYxZPPnjmKY3ni6vB')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="Qm93nZHbVtzm6zD6sNHI">
+                    <button class="pin-btn " onclick="togglePin('Qm93nZHbVtzm6zD6sNHI', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Google Search</h3>
+                        </div>
+                        <span class="card-url">https://google.com</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Google Search in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('Qm93nZHbVtzm6zD6sNHI')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('Qm93nZHbVtzm6zD6sNHI')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="sabDYKlhl0Ue5qqWlqZf">
+                    <button class="pin-btn " onclick="togglePin('sabDYKlhl0Ue5qqWlqZf', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Google Search</h3>
+                        </div>
+                        <span class="card-url">https://google.com</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Google Search in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('sabDYKlhl0Ue5qqWlqZf')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('sabDYKlhl0Ue5qqWlqZf')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="iF7qiZlJz8CPDx5kmMnv">
+                    <button class="pin-btn " onclick="togglePin('iF7qiZlJz8CPDx5kmMnv', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>GTA SA online</h3>
+                        </div>
+                        <span class="card-url">https://quenq.com/apps/vice-city/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://quenq.com/apps/vice-city/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open GTA SA online in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('iF7qiZlJz8CPDx5kmMnv')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('iF7qiZlJz8CPDx5kmMnv')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="2qYIohLFd3G0AsN2FSKN">
+                    <button class="pin-btn " onclick="togglePin('2qYIohLFd3G0AsN2FSKN', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>hack AI</h3>
+                        </div>
+                        <span class="card-url">https://hackerai.co/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hackerai.co/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open hack AI in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('2qYIohLFd3G0AsN2FSKN')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('2qYIohLFd3G0AsN2FSKN')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="oSkBNsqFvzL5b7AteJJ4">
+                    <button class="pin-btn " onclick="togglePin('oSkBNsqFvzL5b7AteJJ4', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Hutch card reloader</h3>
+                        </div>
+                        <span class="card-url">https://reloadpay.hutch.lk/en</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://reloadpay.hutch.lk/en" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Hutch card reloader in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('oSkBNsqFvzL5b7AteJJ4')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('oSkBNsqFvzL5b7AteJJ4')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="9nv3nWBjbEHIiDXePfYa">
+                    <button class="pin-btn " onclick="togglePin('9nv3nWBjbEHIiDXePfYa', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Hyper Bot</h3>
+                        </div>
+                        <span class="card-url">https://sithula-vikasitha.github.io/Hyper-Bot/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://sithula-vikasitha.github.io/Hyper-Bot/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Hyper Bot in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('9nv3nWBjbEHIiDXePfYa')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('9nv3nWBjbEHIiDXePfYa')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="MtNiOj7kqLAnRE1wwK5a">
+                    <button class="pin-btn " onclick="togglePin('MtNiOj7kqLAnRE1wwK5a', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>hyper pro web host</h3>
+                        </div>
+                        <span class="card-url">https://hyper-pro.github.io/Hyper-pro-webhost/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hyper-pro.github.io/Hyper-pro-webhost/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open hyper pro web host in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('MtNiOj7kqLAnRE1wwK5a')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('MtNiOj7kqLAnRE1wwK5a')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="jBIMXwFVNlIrRGzvEK0I">
+                    <button class="pin-btn " onclick="togglePin('jBIMXwFVNlIrRGzvEK0I', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Image enhancer</h3>
+                        </div>
+                        <span class="card-url">https://imgupscaler.ai/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://imgupscaler.ai/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Image enhancer in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('jBIMXwFVNlIrRGzvEK0I')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('jBIMXwFVNlIrRGzvEK0I')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="iydGzejkf1qQLL7zDkxK">
+                    <button class="pin-btn " onclick="togglePin('iydGzejkf1qQLL7zDkxK', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>movie map</h3>
+                        </div>
+                        <span class="card-url">https://www.movie-map.com/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.movie-map.com/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open movie map in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('iydGzejkf1qQLL7zDkxK')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('iydGzejkf1qQLL7zDkxK')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="x7RYwT3G7UquhT2cbay8">
+                    <button class="pin-btn " onclick="togglePin('x7RYwT3G7UquhT2cbay8', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Movies playlist</h3>
+                        </div>
+                        <span class="card-url">https://youtube.com/playlist?list=PLWIa91nCv788LgY-mhi8uWhLKc63icyiI&amp;si=ZVb-XXZqVnzT8zmH</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://youtube.com/playlist?list=PLWIa91nCv788LgY-mhi8uWhLKc63icyiI&amp;si=ZVb-XXZqVnzT8zmH" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Movies playlist in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('x7RYwT3G7UquhT2cbay8')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('x7RYwT3G7UquhT2cbay8')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="mzKDGsdqRpW7xCZsSHsC">
+                    <button class="pin-btn " onclick="togglePin('mzKDGsdqRpW7xCZsSHsC', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Nexus</h3>
+                        </div>
+                        <span class="card-url">https://hyper-pro.github.io/Nexus/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hyper-pro.github.io/Nexus/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Nexus in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('mzKDGsdqRpW7xCZsSHsC')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('mzKDGsdqRpW7xCZsSHsC')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="rqNwZXYYf3GR7JS6bLNM">
+                    <button class="pin-btn " onclick="togglePin('rqNwZXYYf3GR7JS6bLNM', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>PayPal donate site</h3>
+                        </div>
+                        <span class="card-url">https://www.paypal.com/donate/?hosted_button_id=REG8BDKM3GVZJ</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.paypal.com/donate/?hosted_button_id=REG8BDKM3GVZJ" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open PayPal donate site in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('rqNwZXYYf3GR7JS6bLNM')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('rqNwZXYYf3GR7JS6bLNM')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="lR7zVwptPzzOsJlFV8fY">
+                    <button class="pin-btn " onclick="togglePin('lR7zVwptPzzOsJlFV8fY', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>pintrest sky wallpaper</h3>
+                        </div>
+                        <span class="card-url">https://www.pinterest.com/pin/4607182509634573952/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.pinterest.com/pin/4607182509634573952/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open pintrest sky wallpaper in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('lR7zVwptPzzOsJlFV8fY')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('lR7zVwptPzzOsJlFV8fY')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="vbOh6jhFVU2GXkNsPhuU">
+                    <button class="pin-btn " onclick="togglePin('vbOh6jhFVU2GXkNsPhuU', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>privet AI</h3>
+                        </div>
+                        <span class="card-url">https://venice.ai/chat</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://venice.ai/chat" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open privet AI in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('vbOh6jhFVU2GXkNsPhuU')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('vbOh6jhFVU2GXkNsPhuU')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="hxt6HwAfxjHEP0mGbtrA">
+                    <button class="pin-btn " onclick="togglePin('hxt6HwAfxjHEP0mGbtrA', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>rumble video downloader</h3>
+                        </div>
+                        <span class="card-url">https://rumble-video.download/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://rumble-video.download/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open rumble video downloader in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('hxt6HwAfxjHEP0mGbtrA')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('hxt6HwAfxjHEP0mGbtrA')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="PQhtwpWitYnmNn63oOcs">
+                    <button class="pin-btn " onclick="togglePin('PQhtwpWitYnmNn63oOcs', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>shared folder</h3>
+                        </div>
+                        <span class="card-url">https://drive.google.com/drive/folders/1mwSSU9OpDpyTPusFUXnCkHXrJmtDQpZV?usp=sharing</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://drive.google.com/drive/folders/1mwSSU9OpDpyTPusFUXnCkHXrJmtDQpZV?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open shared folder in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('PQhtwpWitYnmNn63oOcs')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('PQhtwpWitYnmNn63oOcs')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="zF55dZq1BXXalIzsD39u">
+                    <button class="pin-btn " onclick="togglePin('zF55dZq1BXXalIzsD39u', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Sinhala cartoon website</h3>
+                        </div>
+                        <span class="card-url">http://ginisisilacartoon.net/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="http://ginisisilacartoon.net/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Sinhala cartoon website in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('zF55dZq1BXXalIzsD39u')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('zF55dZq1BXXalIzsD39u')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="8Wb8AiGLgHrM4rzRR4w2">
+                    <button class="pin-btn " onclick="togglePin('8Wb8AiGLgHrM4rzRR4w2', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>sinhala class new grade 10 playlist</h3>
+                        </div>
+                        <span class="card-url">https://youtube.com/playlist?list=PLux79ADcSUGVa_DaEL2FkuTPr7iPv4l7K&amp;si=ZwWI_vhmSPSzqPso</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://youtube.com/playlist?list=PLux79ADcSUGVa_DaEL2FkuTPr7iPv4l7K&amp;si=ZwWI_vhmSPSzqPso" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open sinhala class new grade 10 playlist in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('8Wb8AiGLgHrM4rzRR4w2')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('8Wb8AiGLgHrM4rzRR4w2')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="Aap8gXEMbNEx71fAKPOJ">
+                    <button class="pin-btn " onclick="togglePin('Aap8gXEMbNEx71fAKPOJ', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>SL game store</h3>
+                        </div>
+                        <span class="card-url">https://game.cloudnet.one/games/search.php</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://game.cloudnet.one/games/search.php" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open SL game store in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('Aap8gXEMbNEx71fAKPOJ')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('Aap8gXEMbNEx71fAKPOJ')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="l9Z7nh1SkRySsK8rSQfq">
+                    <button class="pin-btn " onclick="togglePin('l9Z7nh1SkRySsK8rSQfq', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>temp numbers</h3>
+                        </div>
+                        <span class="card-url">https://temp-number.com</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://temp-number.com" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open temp numbers in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('l9Z7nh1SkRySsK8rSQfq')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('l9Z7nh1SkRySsK8rSQfq')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="EKCHOl1npEERsiE63EN4">
+                    <button class="pin-btn " onclick="togglePin('EKCHOl1npEERsiE63EN4', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>The Cave</h3>
+                        </div>
+                        <span class="card-url">https://hyper-pro.github.io/The-Cave/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://hyper-pro.github.io/The-Cave/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open The Cave in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('EKCHOl1npEERsiE63EN4')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('EKCHOl1npEERsiE63EN4')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="XWhIx720AbyypEhk1ltJ">
+                    <button class="pin-btn " onclick="togglePin('XWhIx720AbyypEhk1ltJ', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Water marker</h3>
+                        </div>
+                        <span class="card-url">https://watermarkly.com/#app</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://watermarkly.com/#app" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Water marker in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('XWhIx720AbyypEhk1ltJ')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('XWhIx720AbyypEhk1ltJ')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="li3cbMPUXTcry34VMduJ">
+                    <button class="pin-btn " onclick="togglePin('li3cbMPUXTcry34VMduJ', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>watermark remover</h3>
+                        </div>
+                        <span class="card-url">https://www.watermarkremover.io/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.watermarkremover.io/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open watermark remover in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('li3cbMPUXTcry34VMduJ')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('li3cbMPUXTcry34VMduJ')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="Zf4amzhfo8RJXBeXwQIV">
+                    <button class="pin-btn " onclick="togglePin('Zf4amzhfo8RJXBeXwQIV', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>web to apk</h3>
+                        </div>
+                        <span class="card-url">https://www.webintoapp.com/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://www.webintoapp.com/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open web to apk in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('Zf4amzhfo8RJXBeXwQIV')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('Zf4amzhfo8RJXBeXwQIV')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div><div class="card" data-id="b1sFXXMlRG30TThjm7su">
+                    <button class="pin-btn " onclick="togglePin('b1sFXXMlRG30TThjm7su', event)" title="Pin Link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.33-2.92A2 2 0 0 1 15 9.84V5h-6v4.84a2 2 0 0 1-.23 1.04L6.44 14a2 2 0 0 0-.44 1.24V17z"></path></svg>
+                    </button>
+                    <div>
+                        <div class="card-header">
+                            <div class="card-icon link-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                            </div>
+                            <h3>Youtube video downloader</h3>
+                        </div>
+                        <span class="card-url">https://v6.www-y2mate.com/</span>
+                    </div>
+                    <div class="button-group">
+                        <a href="https://v6.www-y2mate.com/" target="_blank" rel="noopener noreferrer" class="btn open-btn" title="Open Youtube video downloader in a new tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            Launch Site
+                        </a>
+                        <button class="btn edit-btn action-btn" onclick="openEditModal('b1sFXXMlRG30TThjm7su')" title="Edit">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="btn delete-btn action-btn" onclick="deleteItem('b1sFXXMlRG30TThjm7su')" title="Delete">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                </div></div></div>
             </div>
         </div>
     </main>
 
     <!-- Floating Action Button -->
-    <button class="add-btn" id="openModal" title="Add Database Item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
+    <button class="add-btn" id="openModal" title="Add Database Item" style="display: flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
     </button>
 
     <!-- Floating Settings Button -->
-    <button class="settings-btn" id="openSettings" title="Workspace Settings">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
+    <button class="settings-btn" id="openSettings" title="Workspace Settings" style="display: flex;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
-            <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
             </path>
         </svg>
     </button>
@@ -1864,15 +2922,15 @@
         <div class="toolbar-section">
             <span class="toolbar-label">View:</span>
             <div class="toolbar-pill">
-                <button class="toolbar-btn active" id="layoutGridBtn">Grid</button>
-                <button class="toolbar-btn" id="layoutListBtn">List</button>
+                <button class="toolbar-btn" id="layoutGridBtn">Grid</button>
+                <button class="toolbar-btn active" id="layoutListBtn">List</button>
             </div>
         </div>
         <div class="toolbar-section">
             <span class="toolbar-label">Sort:</span>
             <div class="toolbar-pill">
-                <button class="toolbar-btn active" id="sortCustomBtn">Custom</button>
-                <button class="toolbar-btn" id="sortAlphaBtn">A-Z</button>
+                <button class="toolbar-btn" id="sortCustomBtn">Custom</button>
+                <button class="toolbar-btn active" id="sortAlphaBtn">A-Z</button>
             </div>
         </div>
     </div>
@@ -1926,8 +2984,7 @@
     <!-- Read Note Modal -->
     <div id="noteViewModal" class="modal">
         <div class="modal-content">
-            <button onclick="document.getElementById('noteViewModal').style.display='none'"
-                class="close-modal-btn">✕</button>
+            <button onclick="document.getElementById('noteViewModal').style.display='none'" class="close-modal-btn">✕</button>
             <h3 id="viewNoteTitle"></h3>
             <div id="viewNoteContent"></div>
         </div>
@@ -1936,10 +2993,19 @@
     <!-- Read Task Modal -->
     <div id="taskViewModal" class="modal">
         <div class="modal-content">
-            <button onclick="document.getElementById('taskViewModal').style.display='none'"
-                class="close-modal-btn">✕</button>
+            <button onclick="document.getElementById('taskViewModal').style.display='none'" class="close-modal-btn">✕</button>
             <h3 id="viewTaskTitle"></h3>
             <div id="viewTaskDesc"></div>
+        </div>
+    </div>
+
+    <!-- Custom Popup Dialog -->
+    <div class="custom-popup-overlay" id="customPopupOverlay">
+        <div class="custom-popup-box">
+            <div class="custom-popup-icon" id="customPopupIcon"></div>
+            <div class="custom-popup-title" id="customPopupTitle"></div>
+            <div class="custom-popup-msg" id="customPopupMsg"></div>
+            <div class="custom-popup-actions" id="customPopupActions"></div>
         </div>
     </div>
 
@@ -1993,6 +3059,90 @@
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const sidebarSpacer = document.querySelector('.sidebar-spacer');
+
+        // --- PIN Mask: Firefox fallback (does not support -webkit-text-security) ---
+        // Stores real typed value, displays bullet characters visually.
+        function setupPinMask(el) {
+            // Skip if -webkit-text-security is supported (Chrome/Edge/Safari handle it via CSS)
+            const testEl = document.createElement('input');
+            testEl.style['-webkit-text-security'] = 'disc';
+            if (testEl.style['-webkit-text-security'] === 'disc') return; // CSS handles it, no JS needed
+
+            let realVal = '';
+            el.addEventListener('input', function () {
+                const pos = this.selectionStart;
+                const displayed = this.value;
+                const bullets = '●'.repeat(realVal.length);
+
+                if (displayed.length > bullets.length) {
+                    // Characters added
+                    const addedCount = displayed.length - realVal.length;
+                    const insertAt = pos - addedCount;
+                    const newChars = displayed.slice(insertAt, pos);
+                    realVal = realVal.slice(0, insertAt) + newChars + realVal.slice(insertAt);
+                } else {
+                    // Characters deleted
+                    const delCount = realVal.length - displayed.length;
+                    realVal = realVal.slice(0, pos) + realVal.slice(pos + delCount);
+                }
+                this.value = '●'.repeat(realVal.length);
+                this.setSelectionRange(pos, pos);
+            });
+            // Expose real value via a custom property
+            Object.defineProperty(el, 'realValue', { get: () => realVal, set: (v) => { realVal = v; el.value = '●'.repeat(v.length); } });
+        }
+
+        setupPinMask(document.getElementById('passInput'));
+        setupPinMask(document.getElementById('securityAnswer'));
+        setupPinMask(document.getElementById('newPasswordInput'));
+
+        // Helper: read real value regardless of browser masking method
+        function getPinValue(el) {
+            return el.realValue !== undefined ? el.realValue : el.value;
+        }
+        // Helper: clear pin input properly
+        function clearPinInput(el) {
+            if (el.realValue !== undefined) { el.realValue = ''; } else { el.value = ''; }
+        }
+
+        // --- Custom Popup Utilities (replaces browser alert/confirm) ---
+        const popupOverlay = document.getElementById('customPopupOverlay');
+        const popupIcon = document.getElementById('customPopupIcon');
+        const popupTitle = document.getElementById('customPopupTitle');
+        const popupMsg = document.getElementById('customPopupMsg');
+        const popupActions = document.getElementById('customPopupActions');
+
+        function showPopup(message, title = 'Error') {
+            popupIcon.className = 'custom-popup-icon error';
+            popupIcon.innerHTML = '⚠';
+            popupTitle.textContent = title;
+            popupMsg.textContent = message;
+            popupActions.innerHTML = '<button class="custom-popup-btn ok" id="popupOkBtn">OK</button>';
+            popupOverlay.classList.add('show');
+            document.getElementById('popupOkBtn').onclick = () => popupOverlay.classList.remove('show');
+        }
+
+        function showConfirm(message, title = 'Confirm') {
+            return new Promise((resolve) => {
+                popupIcon.className = 'custom-popup-icon warning';
+                popupIcon.innerHTML = '🗑';
+                popupTitle.textContent = title;
+                popupMsg.textContent = message;
+                popupActions.innerHTML = `
+                    <button class="custom-popup-btn cancel" id="popupCancelBtn">Cancel</button>
+                    <button class="custom-popup-btn confirm-delete" id="popupConfirmBtn">Delete</button>
+                `;
+                popupOverlay.classList.add('show');
+                document.getElementById('popupCancelBtn').onclick = () => {
+                    popupOverlay.classList.remove('show');
+                    resolve(false);
+                };
+                document.getElementById('popupConfirmBtn').onclick = () => {
+                    popupOverlay.classList.remove('show');
+                    resolve(true);
+                };
+            });
+        }
 
         // --- Sidebar Toggle ---
         function openSidebar() {
@@ -2068,13 +3218,18 @@
         })();
 
         loginBtn.onclick = () => {
-            if (passInput.value === currentPassword) {
+            if (getPinValue(passInput) === currentPassword) {
                 loginOverlay.style.opacity = "0";
                 setTimeout(async () => {
                     loginOverlay.style.display = "none";
                     mainContent.style.display = "block";
                     addBtn.style.display = "flex";
                     document.getElementById('openSettings').style.display = "flex";
+
+                    // Auto-open sidebar on desktop, keep closed on mobile
+                    if (window.innerWidth > 768) {
+                        openSidebar();
+                    }
 
                     // Fetch settings before loading cards
                     await loadSettings();
@@ -2083,7 +3238,7 @@
                 }, 300);
             } else {
                 document.getElementById('errorMsg').style.display = "block";
-                passInput.value = "";
+                clearPinInput(passInput);
                 passInput.style.borderColor = "#f87171";
             }
         };
@@ -2118,16 +3273,16 @@
 
         // Step 1: Verify security answer
         document.getElementById('verifyAnswerBtn').onclick = () => {
-            const answer = document.getElementById('securityAnswer').value.trim();
+            const answer = getPinValue(document.getElementById('securityAnswer')).trim();
             if (answer === "2011") {
                 pwStep1.style.display = 'none';
                 pwStep2.style.display = 'block';
-                document.getElementById('newPasswordInput').value = '';
+                clearPinInput(document.getElementById('newPasswordInput'));
                 document.getElementById('pwSaveSuccess').style.display = 'none';
                 document.getElementById('newPasswordInput').focus();
             } else {
                 document.getElementById('securityError').style.display = 'block';
-                document.getElementById('securityAnswer').value = '';
+                clearPinInput(document.getElementById('securityAnswer'));
             }
         };
 
@@ -2141,7 +3296,7 @@
 
         // Step 2: Save new password
         document.getElementById('saveNewPwBtn').onclick = async () => {
-            const newPw = document.getElementById('newPasswordInput').value.trim();
+            const newPw = getPinValue(document.getElementById('newPasswordInput')).trim();
             if (!newPw) return;
             try {
                 const docRef = doc(db, "settings", "config");
@@ -2463,7 +3618,8 @@
             } else if (currentTab === 'tasks') {
                 const isCompleted = item.completed || false;
                 const safeTitle = item.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                const firstLine = item.description ? item.description.split('\n')[0].replace(/</g, "&lt;").replace(/>/g, "&gt;") : "";
+                const firstLineRaw = item.description ? item.description.split('\n')[0] : "";
+                const firstLine = firstLineRaw ? linkify(firstLineRaw).replace(/<br>/g, '') : "";
 
                 if (isCompleted) {
                     card.classList.add('task-completed');
@@ -2562,7 +3718,7 @@
                 await updateDoc(doc(db, currentTab, id), { pinned: newPinned, order: Date.now() });
                 loadCards();
             } catch (e) {
-                alert("Error updating pin status: " + e.message);
+                showPopup("Error updating pin status: " + e.message);
             }
         };
 
@@ -2576,7 +3732,7 @@
                 await updateDoc(doc(db, "tasks", id), { completed: newCompleted });
                 loadCards();
             } catch (e) {
-                alert("Error updating task: " + e.message);
+                showPopup("Error updating task: " + e.message);
             }
         };
 
@@ -2739,7 +3895,7 @@
                 modal.style.display = "none";
                 loadCards(); // Refresh display
             } catch (e) {
-                alert(e.message);
+                showPopup(e.message);
             } finally {
                 saveDataBtn.innerText = originalText;
                 saveDataBtn.disabled = false;
@@ -2750,12 +3906,13 @@
         window.deleteItem = async (id) => {
             const nameMap = { 'links': 'shortcut', 'notes': 'note', 'tasks': 'task' };
             const itemName = nameMap[currentTab] || 'item';
-            if (confirm(`Are you sure you want to permanently delete this ${itemName}?`)) {
+            const confirmed = await showConfirm(`Are you sure you want to permanently delete this ${itemName}?`, 'Delete ' + itemName.charAt(0).toUpperCase() + itemName.slice(1));
+            if (confirmed) {
                 try {
                     await deleteDoc(doc(db, currentTab, id));
                     loadCards(); // Refresh display
                 } catch (e) {
-                    alert("Error deleting item: " + e.message);
+                    showPopup("Error deleting item: " + e.message);
                 }
             }
         };
@@ -2794,6 +3951,6 @@
         });
 
     </script>
-</body>
 
-</html>
+
+</body></html>
